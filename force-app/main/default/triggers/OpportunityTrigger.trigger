@@ -1,3 +1,7 @@
 trigger OpportunityTrigger on Opportunity (after update) {
-    OpportunityTriggerHandler.handleAfterUpdate(Trigger.new);
+    for(Opportunity opp: Trigger.New) {
+        if(opp.StageName == 'Closed Won' && (Trigger.oldMap.get(opp.Id).StageName != 'Closed Won')) {
+            OpportunityTriggerHandler.createTrip(opp);
+        }
+    }
 }
