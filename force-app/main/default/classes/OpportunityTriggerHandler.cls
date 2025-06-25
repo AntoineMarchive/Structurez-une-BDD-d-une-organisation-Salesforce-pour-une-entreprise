@@ -1,13 +1,15 @@
+// Gestion des événements déclenchés par OpportunityTrigger
 public class OpportunityTriggerHandler {
+    // Méthode pour gérer les événements après la mise à jour des opportunités
     public static void handleAfterUpdate(List<Opportunity> newList, Map<Id, Opportunity> oldMap) {
         List<Trip__c> tripsToInsert = new List<Trip__c>();
         
+        // Vérification que la liste des nouvelles opportunités n'est pas vide
         for (Opportunity opp : newList) {
             Opportunity oldOpp = oldMap.get(opp.Id);
-            
-            if (opp.StageName == 'Closed Won' && oldOpp.StageName != 'Closed Won') {
+            // Vérification que l'opportunité est passée à l'état 'Closed Won'
+            if (opp.IsWon  && !oldOpp.IsWon) {
                 Trip__c newTrip = new Trip__c(
-                    Status__c = 'A venir',
                     Destination__c = opp.Destination__c,
                     Start_Date__c = opp.Start_Date__c,
                     End_Date__c = opp.End_Date__c,
@@ -19,9 +21,11 @@ public class OpportunityTriggerHandler {
                 tripsToInsert.add(newTrip);
             }
         }
-
+// Insertion des nouveaux voyages si la liste n'est pas vide
         if (!tripsToInsert.isEmpty()) {
             insert tripsToInsert;
         }
     }
 }
+
+//Si l'opportunité passe à l'état 'Closed Won', un nouveau voyage est créé 
