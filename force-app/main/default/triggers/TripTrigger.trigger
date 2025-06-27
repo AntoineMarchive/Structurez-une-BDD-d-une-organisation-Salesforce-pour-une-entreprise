@@ -1,3 +1,3 @@
-trigger TripTrigger on SOBJECT (before insert) {
-
+trigger TripTrigger on Trip__c (before insert, before update) {
+    TripTriggerController.handleTripDates(Trigger.new);
 }
