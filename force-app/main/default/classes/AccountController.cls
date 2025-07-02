@@ -7,16 +7,16 @@ public with sharing class AccountController {
     }
 
     // Crée un nouveau compte après validation
-    public static Account createAccount(Account account) {
+    public static void createAccount(Account account) {
         if (String.isEmpty(account.Name)) {
             throw new IllegalArgumentException('Le champ "Name" est requis.');
         }
-        return AccountSelector.createAccount(account);
+        AccountSelector.createAccount(account);
     }
 
     // Met à jour un compte existant
-    public static Account updateAccount(Account account) {
-        return AccountSelector.updateAccount(account);
+    public static void updateAccount(Account account) {
+        AccountSelector.updateAccount(account);
     }
 
     // Supprime un compte via son Id

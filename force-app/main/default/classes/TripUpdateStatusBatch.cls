@@ -1,4 +1,4 @@
-public with sharing class TripUpdateStatusBatch implements Database.Batchable<Trip__c> {
+public with sharing class TripUpdateStatusBatch implements Database.Batchable<SObject> {
 
     // Étape 1 : Query des voyages à traiter
     public Database.QueryLocator start(Database.BatchableContext context) {
@@ -10,23 +10,29 @@ public with sharing class TripUpdateStatusBatch implements Database.Batchable<Tr
     }
 
     // Étape 2 : Traitement des enregistrements
-    public void execute(Database.BatchableContext context, List<Trip__c> scope) {
+    public void execute(Database.BatchableContext context, List<SObject> scope) {
         Date today = Date.today();
+        List<Trip__c> tripsToUpdate = new List<Trip__c>();
 
-        for (Trip__c trip : scope) {
-            if (today < trip.Start_Date__c) {
-                trip.Status__c = 'To come';
-            } else if (today >= trip.Start_Date__c && today <= trip.End_Date__c) {
-                trip.Status__c = 'Ongoing';
-            } else if (today > trip.End_Date__c) {
-                trip.Status__c = 'Finished';
+        for (SObject sObj : scope) {
+            Trip__c trip = (Trip__c) sObj;
+            if (today < trip.Start_Date__c && trip.Status__c != 'A venir') {
+                trip.Status__c = 'A venir';
+                tripsToUpdate.add(trip);
+            } else if (today >= trip.Start_Date__c && today <= trip.End_Date__c && trip.Status__c != 'En cours') {
+                trip.Status__c = 'En cours';
+                tripsToUpdate.add(trip);
+            } else if (today > trip.End_Date__c && trip.Status__c != 'Terminé') {
+                trip.Status__c = 'Terminé';
+                tripsToUpdate.add(trip);
             }
         }
 
-        update scope;
+        if (!tripsToUpdate.isEmpty()) {
+            update tripsToUpdate;
+        }
     }
 
-    // Étape 3 : Fin du traitement
     public void finish(Database.BatchableContext context) {
         System.debug('TripUpdateStatusBatch terminé.');
     }

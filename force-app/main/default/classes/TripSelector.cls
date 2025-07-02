@@ -10,7 +10,7 @@ public with sharing class TripSelector {
     // Récupère un voyage par son Id
     public static Trip__c getTripById(Id tripId) {
         return [
-            SELECT Id, Name, Status__c, Opportunity__c, AccountId__c, Destination__c,
+            SELECT Id, Name, Status__c, Opportunity__c, Account__c, Destination__c,
                    Start_Date__c, End_Date__c, Number_of_Participants__c, Total_Cost__c
             FROM Trip__c
             WHERE Id = :tripId
@@ -23,14 +23,14 @@ public with sharing class TripSelector {
         return [
             SELECT Id, Name, Status__c, Opportunity__c, Destination__c
             FROM Trip__c
-            WHERE AccountId__c = :accountId
+            WHERE Account__c = :accountId
         ];
     }
 
     // Récupère les voyages liés à une destination
     public static List<Trip__c> getTripsByDestinationId(Id destinationId) {
         return [
-            SELECT Id, Name, Status__c, Opportunity__c, AccountId__c
+            SELECT Id, Name, Status__c, Opportunity__c, Account__c
             FROM Trip__c
             WHERE Destination__c = :destinationId
         ];
@@ -50,7 +50,7 @@ public with sharing class TripSelector {
 
     // Supprime tous les voyages liés à un compte
     public static void deleteTripsByAccountId(Id accountId) {
-        List<Trip__c> tripsToDelete = [SELECT Id FROM Trip__c WHERE AccountId__c = :accountId];
+        List<Trip__c> tripsToDelete = [SELECT Id FROM Trip__c WHERE Account__c = :accountId];
         delete tripsToDelete;
     }
 }

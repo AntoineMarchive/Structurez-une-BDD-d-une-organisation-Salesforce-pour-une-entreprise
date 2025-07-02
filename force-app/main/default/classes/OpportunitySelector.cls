@@ -4,7 +4,7 @@ public with sharing class OpportunitySelector {
     // Récupère une opportunité par son Id
     public static Opportunity getOpportunityById(Id opportunityId) {
         return [
-            SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c, Destination__r.Name,
+            SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c,
                    Number_of_Participants__c, Start_Date__c, End_Date__c, Amount
             FROM Opportunity
             WHERE Id = :opportunityId
@@ -15,7 +15,7 @@ public with sharing class OpportunitySelector {
     // Récupère toutes les opportunités rattachées à un compte
     public static List<Opportunity> getOpportunitiesByAccountId(Id accountId) {
         return [
-            SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c, Destination__r.Name,
+            SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c,
                    Number_of_Participants__c, Start_Date__c, End_Date__c, Amount
             FROM Opportunity
             WHERE AccountId = :accountId
@@ -25,10 +25,19 @@ public with sharing class OpportunitySelector {
     // Récupère toutes les opportunités à un certain stade
     public static List<Opportunity> getOpportunitiesByStageName(String stageName) {
         return [
-            SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c, Destination__r.Name,
+            SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c,
                    Number_of_Participants__c, Start_Date__c, End_Date__c, Amount
             FROM Opportunity
             WHERE StageName = :stageName
+        ];
+    }
+
+    // Récupère un contrat lié à une opportunité
+    public static Contract getContractByOppId(Id opportunityId) {
+        return [
+            SELECT Id, ContractNumber, AccountId, Status, StartDate, EndDate, ContractTerm 
+            FROM Contract  
+            LIMIT 1
         ];
     }
 

@@ -11,7 +11,7 @@ public with sharing class TripController {
             End_Date__c = opp.End_Date__c,
             Number_Of_Participants__c = opp.Number_Of_Participants__c,
             Total_Cost__c = opp.Amount,
-            AccountId__c = opp.AccountId
+            Account__c = opp.AccountId
         );
         return TripSelector.createTrip(newTrip);
     }

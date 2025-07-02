@@ -5,17 +5,12 @@ public with sharing class ContractController {
     public static Contract createContractWithStatusAndTerm(Opportunity opp, String status, Integer contractTerm) {
         Contract newContract = new Contract(
             AccountId = opp.AccountId,
-            OpportunityId__c = opp.Id,
+            // OpportunityId__c = opp.Id,
             Status = status,
             StartDate = opp.Start_Date__c,
             ContractTerm = contractTerm
         );
         return ContractSelector.createContract(newContract);
-    }
-
-    // Récupère un contrat via l’Id d’une opportunité
-    public static Contract getContractByOppId(Id oppId) {
-        return ContractSelector.getContractByOppId(oppId);
     }
 
     // Récupère tous les contrats liés à un compte
@@ -35,9 +30,9 @@ public with sharing class ContractController {
     }
 
     // Supprime un contrat lié à une opportunité
-    public static void deleteContractByOpportunityId(Id opportunityId) {
-        ContractSelector.deleteContractByOpportunityId(opportunityId);
-    }
+    // public static void deleteContractByOpportunityId(Id opportunityId) {
+    //     ContractSelector.deleteContractByOpportunityId(opportunityId);
+    // }
 
     // Supprime tous les contrats liés à un compte
     public static void deleteContractsByAccountId(Id accountId) {

@@ -7,20 +7,10 @@ public with sharing class ContractSelector {
         return contract;
     }
 
-    // Récupère un contrat lié à une opportunité
-    public static Contract getContractByOppId(Id opportunityId) {
-        return [
-            SELECT Id, ContractNumber, AccountId, OpportunityId__c, Status, StartDate, EndDate, ContractTerm 
-            FROM Contract 
-            WHERE OpportunityId__c = :opportunityId 
-            LIMIT 1
-        ];
-    }
-
     // Récupère tous les contrats liés à un compte
     public static List<Contract> getContractsByAccountId(Id accountId) {
         return [
-            SELECT Id, ContractNumber, AccountId, OpportunityId__c, Status, StartDate, EndDate, ContractTerm 
+            SELECT Id, ContractNumber, AccountId, Status, StartDate, EndDate, ContractTerm 
             FROM Contract 
             WHERE AccountId = :accountId
         ];
@@ -44,15 +34,15 @@ public with sharing class ContractSelector {
     }
 
     // Supprime un contrat lié à une opportunité
-    public static void deleteContractByOpportunityId(Id opportunityId) {
-        Contract contractToDelete = [
-            SELECT Id 
-            FROM Contract 
-            WHERE OpportunityId__c = :opportunityId 
-            LIMIT 1
-        ];
-        delete contractToDelete;
-    }
+    // public static void deleteContractByOpportunityId(Id opportunityId) {
+    //     Contract contractToDelete = [
+    //         SELECT Id 
+    //         FROM Contract 
+    //         WHERE OpportunityId__c = :opportunityId 
+    //         LIMIT 1
+    //     ];
+    //     delete contractToDelete;
+    // }
 
     // Supprime tous les contrats liés à un compte
     public static void deleteContractsByAccountId(Id accountId) {
