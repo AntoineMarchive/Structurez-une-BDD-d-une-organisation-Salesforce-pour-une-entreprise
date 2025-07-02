@@ -5,23 +5,24 @@ public class AccountControllerTest {
     static void testCreateGetUpdateDeleteAccount() {
         // Création
         Account acc = new Account(Name = 'Test Account');
-        Account createdAcc = AccountController.createAccount(acc);
-        System.assertNotEquals(null, createdAcc.Id, 'Le compte doit être inséré');
+        AccountController.createAccount(acc); // plus d'affectation inutile
 
         // Récupération
-        Account fetchedAcc = AccountController.getAccountById(createdAcc.Id);
-        System.assertEquals(createdAcc.Id, fetchedAcc.Id, 'Le compte récupéré doit correspondre');
+        Account fetchedAcc = AccountController.getAccountById(acc.Id);
+        System.assertEquals(acc.Id, fetchedAcc.Id, 'Le compte récupéré doit correspondre');
 
         // Mise à jour
-        createdAcc.Phone = '0102030405';
-        Account updatedAcc = AccountController.updateAccount(createdAcc);
+        acc.Phone = '0102030405';
+        AccountController.updateAccount(acc); // plus d'affectation inutile
+        Account updatedAcc = AccountController.getAccountById(acc.Id);
         System.assertEquals('0102030405', updatedAcc.Phone, 'Le numéro de téléphone doit être mis à jour');
 
         // Suppression
-        AccountController.deleteAccountById(createdAcc.Id);
+        AccountController.deleteAccountById(acc.Id);
+
         Test.startTest();
         try {
-            AccountController.getAccountById(createdAcc.Id);
+            AccountController.getAccountById(acc.Id);
             System.assert(false, 'Une exception aurait dû être levée');
         } catch (Exception e) {
             System.assert(e.getMessage().contains('List has no rows'), 'Erreur attendue après suppression');

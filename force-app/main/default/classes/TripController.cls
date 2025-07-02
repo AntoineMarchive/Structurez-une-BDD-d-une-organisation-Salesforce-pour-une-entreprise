@@ -5,7 +5,7 @@ public with sharing class TripController {
     public static Trip__c createTrip(Opportunity opp) {
         Trip__c newTrip = new Trip__c(
             Opportunity__c = opp.Id,
-            Status__c = 'To come',
+            Status__c = 'A venir',
             Destination__c = opp.Destination__c,
             Start_Date__c = opp.Start_Date__c,
             End_Date__c = opp.End_Date__c,
