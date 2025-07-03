@@ -2,9 +2,9 @@ public with sharing class TripCancelBatch implements Database.Batchable<SObject>
 
     public Database.QueryLocator start(Database.BatchableContext context) {
         return Database.getQueryLocator([
-            SELECT Id, Status__c, Start_Date__c, Number_of_Participants__c
+            SELECT Id, Status__c, Start_date__c, Number_of_participants__c
             FROM Trip__c
-            WHERE Status__c = 'A venir' AND Start_Date__c != null AND Number_of_Participants__c != null
+            WHERE Status__c = 'A venir' AND Start_date__c != null AND Number_of_participants__c != null
         ]);
     }
 
@@ -14,9 +14,9 @@ public with sharing class TripCancelBatch implements Database.Batchable<SObject>
 
         for (SObject sObj : scope) {
             Trip__c trip = (Trip__c) sObj;
-            Integer daysBeforeStart = today.daysBetween(trip.Start_Date__c);
-            Boolean tooFewParticipants = trip.Number_of_Participants__c < 10;
-            Boolean startsSoon = daysBeforeStart <= 7 && daysBeforeStart >= 0;
+            Integer daysBeforeStart = today.daysBetween(trip.Start_date__c);
+            Boolean tooFewParticipants = trip.Number_of_participants__c < 10;
+            Boolean startsSoon = daysBeforeStart <= 7;
 
             if (tooFewParticipants && startsSoon) {
                 trip.Status__c = 'Annulé';
@@ -33,3 +33,4 @@ public with sharing class TripCancelBatch implements Database.Batchable<SObject>
         System.debug('TripCancelBatch terminé.');
     }
 }
+ 

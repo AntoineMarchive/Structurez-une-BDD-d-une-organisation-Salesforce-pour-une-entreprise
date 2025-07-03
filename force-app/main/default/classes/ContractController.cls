@@ -7,7 +7,7 @@ public with sharing class ContractController {
             AccountId = opp.AccountId,
             // OpportunityId__c = opp.Id,
             Status = status,
-            StartDate = opp.Start_Date__c,
+            StartDate = opp.Start_date__c,
             ContractTerm = contractTerm
         );
         return ContractSelector.createContract(newContract);

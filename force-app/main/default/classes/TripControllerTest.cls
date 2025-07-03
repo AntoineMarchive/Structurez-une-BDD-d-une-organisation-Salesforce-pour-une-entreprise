@@ -13,9 +13,9 @@ public class TripControllerTest {
             CloseDate = Date.today().addDays(30),
             StageName = 'Closed Won',
             Destination__c = 'Lisbonne',
-            Number_Of_Participants__c = 20,
-            Start_Date__c = Date.today().addDays(10),
-            End_Date__c = Date.today().addDays(15),
+            Number_of_participants__c = 20,
+            Start_date__c = Date.today().addDays(10),
+            End_date__c = Date.today().addDays(15),
             Amount = 10000
         );
         insert opp;

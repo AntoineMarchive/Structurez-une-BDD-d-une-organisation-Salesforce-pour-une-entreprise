@@ -7,10 +7,10 @@ public with sharing class TripController {
             Opportunity__c = opp.Id,
             Status__c = 'A venir',
             Destination__c = opp.Destination__c,
-            Start_Date__c = opp.Start_Date__c,
-            End_Date__c = opp.End_Date__c,
-            Number_Of_Participants__c = opp.Number_Of_Participants__c,
-            Total_Cost__c = opp.Amount,
+            Start_date__c = opp.Start_date__c,
+            End_date__c = opp.End_date__c,
+            Number_of_participants__c = opp.Number_of_participants__c,
+            Total_cost__c = opp.Amount,
             Account__c = opp.AccountId
         );
         return TripSelector.createTrip(newTrip);

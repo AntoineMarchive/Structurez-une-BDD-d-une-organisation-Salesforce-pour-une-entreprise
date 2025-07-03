@@ -12,9 +12,9 @@ public class TripUpdateStatusBatchControllerTest {
             CloseDate = Date.today().addDays(5),
             AccountId = acc.Id,
             Destination__c = 'Canada',
-            Start_Date__c = Date.today().addDays(-2), // le voyage a commencé
-            End_Date__c = Date.today().addDays(3),    // et est en cours
-            Number_Of_Participants__c = 12,
+            Start_date__c = Date.today().addDays(-2), // le voyage a commencé
+            End_date__c = Date.today().addDays(3),    // et est en cours
+            Number_of_participants__c = 12,
             Amount = 4000
         );
         insert opp;
@@ -23,10 +23,10 @@ public class TripUpdateStatusBatchControllerTest {
             Opportunity__c = opp.Id,
             Status__c = 'Brouillon', // statut initial incorrect
             Destination__c = opp.Destination__c,
-            Start_Date__c = opp.Start_Date__c,
-            End_Date__c = opp.End_Date__c,
-            Number_of_Participants__c = opp.Number_Of_Participants__c,
-            Total_Cost__c = opp.Amount,
+            Start_date__c = opp.Start_date__c,
+            End_date__c = opp.End_date__c,
+            Number_of_participants__c = opp.Number_of_participants__c,
+            Total_cost__c = opp.Amount,
             Account__c = acc.Id
         );
         insert trip;

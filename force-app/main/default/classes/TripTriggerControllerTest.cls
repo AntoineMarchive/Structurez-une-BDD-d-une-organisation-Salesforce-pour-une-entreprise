@@ -6,9 +6,9 @@ public class TripTriggerControllerTest {
         // Création d’un Trip avec une date de début > date de fin → doit générer une erreur
         Trip__c invalidTrip = new Trip__c(
             Status__c = 'A venir',
-            Start_Date__c = Date.today().addDays(10),
-            End_Date__c = Date.today().addDays(5),
-            Number_of_Participants__c = 15,
+            Start_date__c = Date.today().addDays(10),
+            End_date__c = Date.today().addDays(5),
+            Number_of_participants__c = 15,
             Destination__c = 'Lisbonne'
         );
 

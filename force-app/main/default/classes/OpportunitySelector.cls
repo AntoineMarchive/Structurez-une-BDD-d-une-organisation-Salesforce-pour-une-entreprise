@@ -5,7 +5,7 @@ public with sharing class OpportunitySelector {
     public static Opportunity getOpportunityById(Id opportunityId) {
         return [
             SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c,
-                   Number_of_Participants__c, Start_Date__c, End_Date__c, Amount
+                   Number_of_participants__c, Start_date__c, End_date__c, Amount
             FROM Opportunity
             WHERE Id = :opportunityId
             LIMIT 1
@@ -16,7 +16,7 @@ public with sharing class OpportunitySelector {
     public static List<Opportunity> getOpportunitiesByAccountId(Id accountId) {
         return [
             SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c,
-                   Number_of_Participants__c, Start_Date__c, End_Date__c, Amount
+                   Number_of_participants__c, Start_date__c, End_date__c, Amount
             FROM Opportunity
             WHERE AccountId = :accountId
         ];
@@ -26,7 +26,7 @@ public with sharing class OpportunitySelector {
     public static List<Opportunity> getOpportunitiesByStageName(String stageName) {
         return [
             SELECT Id, Name, AccountId, Type, CloseDate, StageName, Destination__c,
-                   Number_of_Participants__c, Start_Date__c, End_Date__c, Amount
+                   Number_of_participants__c, Start_date__c, End_date__c, Amount
             FROM Opportunity
             WHERE StageName = :stageName
         ];

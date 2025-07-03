@@ -11,7 +11,7 @@ public with sharing class TripSelector {
     public static Trip__c getTripById(Id tripId) {
         return [
             SELECT Id, Name, Status__c, Opportunity__c, Account__c, Destination__c,
-                   Start_Date__c, End_Date__c, Number_of_Participants__c, Total_Cost__c
+                   Start_date__c, End_date__c, Number_of_participants__c, Total_cost__c
             FROM Trip__c
             WHERE Id = :tripId
             LIMIT 1

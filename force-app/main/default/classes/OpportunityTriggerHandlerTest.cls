@@ -14,8 +14,8 @@ public class OpportunityTriggerHandlerTest {
             CloseDate = Date.today().addDays(10),
             AccountId = acc.Id,
             Destination__c = 'Lisbonne',
-            Start_Date__c = Date.today().addDays(30),
-            End_Date__c = Date.today().addDays(35),
+            Start_date__c = Date.today().addDays(30),
+            End_date__c = Date.today().addDays(35),
             Number_of_Participants__c = 25,
             Amount = 8000
         );

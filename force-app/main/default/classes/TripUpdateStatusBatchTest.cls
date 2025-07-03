@@ -11,9 +11,9 @@ public class TripUpdateStatusBatchTest {
         Trip__c futureTrip = new Trip__c(
             Destination__c = 'Rome',
             Account__c = acc.Id,
-            Start_Date__c = Date.today().addDays(10),
-            End_Date__c = Date.today().addDays(15),
-            Number_of_Participants__c = 15,
+            Start_date__c = Date.today().addDays(10),
+            End_date__c = Date.today().addDays(15),
+           Number_of_participants__c = 15,
             Status__c = 'Brouillon'
         );
 
@@ -21,9 +21,9 @@ public class TripUpdateStatusBatchTest {
         Trip__c ongoingTrip = new Trip__c(
             Destination__c = 'Paris',
             Account__c = acc.Id,
-            Start_Date__c = Date.today().addDays(-2),
-            End_Date__c = Date.today().addDays(3),
-            Number_of_Participants__c = 12,
+            Start_date__c = Date.today().addDays(-2),
+            End_date__c = Date.today().addDays(3),
+           Number_of_participants__c = 12,
             Status__c = 'Brouillon'
         );
 
@@ -31,9 +31,9 @@ public class TripUpdateStatusBatchTest {
         Trip__c finishedTrip = new Trip__c(
             Destination__c = 'Tokyo',
             Account__c = acc.Id,
-            Start_Date__c = Date.today().addDays(-10),
-            End_Date__c = Date.today().addDays(-5),
-            Number_of_Participants__c = 20,
+            Start_date__c = Date.today().addDays(-10),
+            End_date__c = Date.today().addDays(-5),
+           Number_of_participants__c = 20,
             Status__c = 'Brouillon'
         );
 

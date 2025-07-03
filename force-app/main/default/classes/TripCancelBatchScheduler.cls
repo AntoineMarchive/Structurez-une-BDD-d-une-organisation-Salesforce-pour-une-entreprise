@@ -2,6 +2,7 @@
 
 public with sharing class TripCancelBatchScheduler implements Schedulable {
     public void execute(SchedulableContext context) {
-        TripCancelBatchController.runTripCancelBatch();
+        TripCancelBatch batch = new TripCancelBatch();
+        Database.executeBatch(batch);
     }
 }

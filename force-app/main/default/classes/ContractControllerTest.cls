@@ -13,9 +13,9 @@ public class ContractControllerTest {
             AccountId = acc.Id,
             CloseDate = Date.today().addDays(30),
             StageName = 'Proposal/Price Quote',
-            Start_Date__c = Date.today().addDays(10),
-            End_Date__c = Date.today().addDays(20),
-            Number_Of_Participants__c = 10,
+            Start_date__c = Date.today().addDays(10),
+            End_date__c = Date.today().addDays(20),
+            Number_Of_participants__c = 10,
             Destination__c = 'Canada'
         );
         insert opp;

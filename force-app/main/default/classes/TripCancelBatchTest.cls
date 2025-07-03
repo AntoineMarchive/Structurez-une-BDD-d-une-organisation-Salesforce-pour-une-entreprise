@@ -10,22 +10,22 @@ public class TripCancelBatchTest {
         // Trip à annuler : < 10 participants, commence dans moins de 7 jours
         Trip__c cancelTrip = new Trip__c(
             Destination__c = 'Rome',
-            Start_Date__c = Date.today().addDays(5),
-            End_Date__c = Date.today().addDays(10),
-            Number_of_Participants__c = 5,
+            Start_date__c = Date.today().addDays(5),
+            End_date__c = Date.today().addDays(10),
+            Number_of_participants__c = 5,
             Status__c = 'A venir',
-            Total_Cost__c = 2000,
+            Total_cost__c = 2000,
             Account__c = acc.Id
         );
 
         // Trip à conserver : 12 participants
         Trip__c keepTrip = new Trip__c(
             Destination__c = 'Rome',
-            Start_Date__c = Date.today().addDays(5),
-            End_Date__c = Date.today().addDays(10),
-            Number_of_Participants__c = 12,
+            Start_date__c = Date.today().addDays(5),
+            End_date__c = Date.today().addDays(10),
+            Number_of_participants__c = 12,
             Status__c = 'A venir',
-            Total_Cost__c = 4000,
+            Total_cost__c = 4000,
             Account__c = acc.Id
         );
 
