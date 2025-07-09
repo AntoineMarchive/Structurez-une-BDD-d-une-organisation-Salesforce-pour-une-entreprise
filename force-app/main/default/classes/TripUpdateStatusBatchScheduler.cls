@@ -2,6 +2,7 @@
 
 public with sharing class TripUpdateStatusBatchScheduler implements Schedulable {
     public void execute(SchedulableContext context) {
-        TripUpdateStatusBatchController.runTripUpdateStatusBatch();
+        TripUpdateStatusBatch batch = new TripUpdateStatusBatch();
+        Database.executeBatch(batch);
     }
 }

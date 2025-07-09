@@ -5,7 +5,7 @@ public with sharing class TripUpdateStatusBatch implements Database.Batchable<SO
         return Database.getQueryLocator([
             SELECT Id, Status__c, Start_date__c, End_date__c 
             FROM Trip__c
-            WHERE Start_date__c != null AND End_date__c != null
+            WHERE Status__c in ('A venir', 'En cours') 
         ]);
     }
 
