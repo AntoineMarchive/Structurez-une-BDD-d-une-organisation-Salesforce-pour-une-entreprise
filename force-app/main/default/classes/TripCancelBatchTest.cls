@@ -3,11 +3,13 @@ public class TripCancelBatchTest {
 
     @isTest
     static void testTripCancelBatch() {
-        // Créer un compte
+        // Préparation
         Account acc = new Account(Name = 'Test Account');
         insert acc;
 
-        // Trip à annuler : < 10 participants, commence dans moins de 7 jours
+        Test.startTest();
+
+        // Insertion des voyages DANS le bloc test
         Trip__c cancelTrip = new Trip__c(
             Destination__c = 'Rome',
             Start_date__c = Date.today().addDays(5),
@@ -18,7 +20,6 @@ public class TripCancelBatchTest {
             Account__c = acc.Id
         );
 
-        // Trip à conserver : 12 participants
         Trip__c keepTrip = new Trip__c(
             Destination__c = 'Rome',
             Start_date__c = Date.today().addDays(5),
@@ -29,19 +30,31 @@ public class TripCancelBatchTest {
             Account__c = acc.Id
         );
 
-        insert new List<Trip__c>{cancelTrip, keepTrip};
+        Trip__c lateTrip = new Trip__c(
+            Destination__c = 'Rome',
+            Start_date__c = Date.today().addDays(10),
+            End_date__c = Date.today().addDays(15),
+            Number_of_participants__c = 5,
+            Status__c = 'A venir',
+            Total_cost__c = 2500,
+            Account__c = acc.Id
+        );
 
-        // Exécuter le batch
-        Test.startTest();
-        TripCancelBatch batch = new TripCancelBatch();
-        Database.executeBatch(batch);
+        insert new List<Trip__c>{cancelTrip, keepTrip, lateTrip};
+
+        // Exécution du batch
+        Database.executeBatch(new TripCancelBatch());
         Test.stopTest();
 
-        // Vérifier que seul le premier a été annulé
-        Trip__c updatedTrip1 = [SELECT Id, Status__c FROM Trip__c WHERE Id = :cancelTrip.Id];
-        Trip__c updatedTrip2 = [SELECT Id, Status__c FROM Trip__c WHERE Id = :keepTrip.Id];
+        // Vérification post-traitement
+        List<Trip__c> trips = [
+            SELECT Id, Status__c FROM Trip__c WHERE Id IN :new List<Id>{cancelTrip.Id, keepTrip.Id, lateTrip.Id}
+        ];
 
-        System.assertEquals('Annulé', updatedTrip1.Status__c, 'Le voyage doit être annulé');
-        System.assertEquals('A venir', updatedTrip2.Status__c, 'Le voyage ne doit pas être annulé');
+        Map<Id, Trip__c> tripMap = new Map<Id, Trip__c>(trips);
+
+        System.assertEquals('Annulé', tripMap.get(cancelTrip.Id).Status__c, 'Le voyage doit être annulé');
+        System.assertEquals('A venir', tripMap.get(keepTrip.Id).Status__c, 'Le voyage ne doit pas être annulé');
+        System.assertEquals('A venir', tripMap.get(lateTrip.Id).Status__c, 'Le voyage ne doit pas être annulé (départ trop lointain)');
     }
 }
